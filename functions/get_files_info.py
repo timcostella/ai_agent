@@ -10,11 +10,11 @@ def get_files_info(working_directory, directory="."):
     target_dir = os.path.normpath(os.path.join(working_dir_abs, directory))
     #print(f"Target Directory: {target_dir}")
 
-     # Check if the directory is a directory
+     # Check if the target directory is a directory
     if not os.path.isdir(target_dir):
         return f'Error: {directory} is not a directory'
 
-    # Check if the target directory is in the working directory 
+    # Check if the target directory is within the working directory 
     if not os.path.commonpath([working_dir_abs, target_dir]) == working_dir_abs:
         return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
     
@@ -33,9 +33,9 @@ def get_files_info(working_directory, directory="."):
             # print(f"File {dir_item} not found")
             return f"File {dir_item} not found"
         
-        dir_contents_list.append({"name":dir_item,"file_size": file_size, "is_dir":is_dir })
+        dir_contents_list.append(f"- name: {dir_item}, file_size:{file_size}, is_dir:{is_dir}")
 
     # print("returning results")
-    return dir_contents_list
+    return "\n".join(dir_contents_list)
         
         
