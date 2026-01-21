@@ -1,7 +1,29 @@
 import os
 
+from google.genai import types
+
+schema_write_file_content = types.FunctionDeclaration(
+    name="write_file_content",
+    description="Opens or creates the file at a specified file_path relative to the working directory and writes content to it",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File Path to the file that you want to retrieve content from",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="Content (text) that you want to write to the file located at file_path",
+            )
+        },
+        required=["file_path", "content"],
+    ),
+)
+
 def write_file(working_directory, file_path, content):
 
+    print("Running write_file")
     try:
         current_step = "starting"
 
